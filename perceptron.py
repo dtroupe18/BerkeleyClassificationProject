@@ -45,9 +45,15 @@ class PerceptronClassifier:
         (and thus represents a vector a values).
         """
         self.features = trainingData[0].keys()
+        number_of_errors = 0
 
         for iteration in range(self.max_iterations):
+            if iteration > 0:
+                print "Number of Errors: ", number_of_errors
+                # print the number of errors after each iteration
+                number_of_errors = 0 # reset for next iteration
             print "Starting iteration ", iteration, "..."
+
             for i in range(len(trainingData)):
                 "*** YOUR CODE HERE ***"
                 # idea is the find the label that best represents
@@ -67,6 +73,7 @@ class PerceptronClassifier:
 
                 actual_label = trainingLabels[i]
                 if best_label != actual_label: # prediction is incorrect
+                    number_of_errors += 1
                     # update weights
                     self.weights[actual_label] = self.weights[actual_label] + current_datum # under predicted
                     self.weights[best_label] = self.weights[best_label] - current_datum # over predicted
