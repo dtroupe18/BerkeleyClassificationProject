@@ -59,24 +59,24 @@ class PerceptronClassifier:
                 # idea is the find the label that best represents
                 # each datum (image)
 
-                top_score = None
+                top_score = -1
                 best_label = None
-                current_datum = trainingData[i] # current image
+                current_datum = trainingData[i]  # current image
 
                 for label in self.legalLabels:
                     # Calculate the prediction on the current image for every labels weights (0-9)
                     result = current_datum * self.weights[label]
-                    if result > top_score or top_score is None:
+                    if result > top_score:
                         # save the result with the largest value - i.e most likely to be correct
                         top_score = result
                         best_label = label
 
                 actual_label = trainingLabels[i]
-                if best_label != actual_label: # prediction is incorrect
+                if best_label != actual_label:  # prediction is incorrect
                     number_of_errors += 1
                     # update weights
-                    self.weights[actual_label] = self.weights[actual_label] + current_datum # under predicted
-                    self.weights[best_label] = self.weights[best_label] - current_datum # over predicted
+                    self.weights[actual_label] = self.weights[actual_label] + current_datum  # under predicted
+                    self.weights[best_label] = self.weights[best_label] - current_datum  # over predicted
 
     def classify(self, data):
         """
