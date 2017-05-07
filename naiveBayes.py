@@ -109,7 +109,7 @@ class NaiveBayesClassifier(classificationMethod.ClassificationMethod):
 
             for label in self.legalLabels:
                 for location in self.features:
-                    k_frequency[(location, label)] += k  # 2*k??
+                    k_frequency[(location, label)] += k
                     k_conditional[(location, label)] += k
 
             for x, count in k_conditional.items():
